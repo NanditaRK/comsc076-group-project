@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.Map;
 
+
 public class CompressFile {
 
     public static void main(String[] args) {
@@ -27,8 +28,8 @@ public class CompressFile {
             HuffmanCode.Tree.Node root = huffmanTree.root;
 
             
-            HuffmanCode.Tree.Codes codeTable = new HuffmanCode.Tree.Codes(root);
-            Map<Character, String> codes = codeTable.getCodeTable();
+            HuffmanCode.Tree.Codes codeKey = new HuffmanCode.Tree.Codes(root);
+            Map<Character, String> codes = codeKey.getCodes();
 
             //write codes
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(compressedFileName));

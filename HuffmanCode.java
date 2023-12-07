@@ -17,21 +17,37 @@ public class HuffmanCode {
         return counts;
     }
 
+    
+    public static Tree getHuffmanTree(Map<Character, String> codes) {
+        PriorityQueue<Tree> heap = new PriorityQueue<>();
+        for (Map.Entry<Character, String> entry : codes.entrySet()) {
+            heap.add(new Tree(entry.getValue().length(), entry.getKey()));
+        }
+    
+        while (heap.size() > 1) {
+            Tree t1 = heap.poll();
+            Tree t2 = heap.poll();
+            heap.add(new Tree(t1, t2));
+        }
+    
+        return heap.poll();
+    }
     public static Tree getHuffmanTree(int[] counts) {
         PriorityQueue<Tree> heap = new PriorityQueue<>();
         for (int i = 0; i < counts.length; i++) {
             if (counts[i] > 0)
                 heap.add(new Tree(counts[i], (char) i));
         }
-
+    
         while (heap.size() > 1) {
             Tree t1 = heap.poll();
             Tree t2 = heap.poll();
             heap.add(new Tree(t1, t2));
         }
-
+    
         return heap.poll();
     }
+    
 
     public static class Tree implements Comparable<Tree> {
         Node root;
@@ -69,27 +85,28 @@ public class HuffmanCode {
         }
 
         public static class Codes {
-            private final Map<Character, String> codeTable = new HashMap<>();
+            private final Map<Character, String> codes = new HashMap<>();
 
             public Codes(Node root) {
-                buildCodeTable(root, "");
+                buildCodes(root, "");
             }
 
-            private void buildCodeTable(Node node, String code) {
+            private void buildCodes(Node node, String code) {
                 if (node != null) {
                     if (node.left == null && node.right == null) {
-                        codeTable.put(node.element, code);
+                        codes.put(node.element, code);
                     }
-                    buildCodeTable(node.left, code + "0");
-                    buildCodeTable(node.right, code + "1");
+                    buildCodes(node.left, code + "0");
+                    buildCodes(node.right, code + "1");
                 }
             }
 
             
 
-            public Map<Character, String> getCodeTable() {
-                return codeTable;
+            public Map<Character, String> getCodes() {
+                return codes;
             }
+            
         }
         
     }

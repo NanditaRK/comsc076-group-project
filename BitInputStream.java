@@ -47,6 +47,13 @@ public class BitInputStream {
 		return (8 - bitsRemaining) + 8 * (input.available());
 	}
 
+	public boolean hasNextBit() throws IOException {
+		
+		if(available()>0){
+			return true;
+		}
+		return false;
+	}
 	/*
 	 * This method reads the next bit from the input stream.
 	 * 
@@ -102,3 +109,4 @@ public class BitInputStream {
 		input.close();
 	}
 }
+

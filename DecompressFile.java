@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Map;
 
-public class Decompressfile {
+public class DecompressFile {
 
 	public static void main(String[] args) {
 		if (args.length != 2) {
