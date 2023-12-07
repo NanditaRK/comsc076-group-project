@@ -47,29 +47,35 @@ public class CompressFile {
             System.out.println("done.");
 
         } catch (IOException e) {
-            System.out.println("Something went wrong.");
+            
+            System.out.println("Something weent wrong.");
         }
     }
 
     private static String readFile(String fileName) throws IOException {
         try (FileInputStream fis = new FileInputStream(fileName)) {
             
-            int fileSize = fis.available();
+             int fileSize = fis.available();
             byte[] buffer = new byte[fileSize];
-            fis.read(buffer);
+        fis.read(buffer);
             return new String(buffer);
         }
     }
 
     private static void compressFile(String text, Map<Character, String> codes, BitOutputStream bitOutputStream) throws IOException {
         for (char character : text.toCharArray()) {
+
+            
             String code = codes.get(character);
+            
             writeCodeToStream(code, bitOutputStream);
         }
     }
 
     private static void writeCodeToStream(String code, BitOutputStream bitOutputStream) throws IOException {
+        
         for (char bit : code.toCharArray()) {
+            
             bitOutputStream.writeBit(bit);
         }
     }
